@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import actionlib ä# imported actionlib
+import actionlib # imported actionlib
 from control_msgs.msg import (
     FollowJointTrajectoryAction,
     FollowJointTrajectoryGoal)
@@ -36,6 +36,7 @@ class TestFakeJointDriver(unittest.TestCase):
             FollowJointTrajectoryAction)
 
         self.client.wait_for_server(timeout=rospy.Duration(10.0))
+
 # created funciton for join states
 
     def cb_joint_states(self, msg):
