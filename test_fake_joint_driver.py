@@ -78,7 +78,7 @@ class TestFakeJointDriver(unittest.TestCase):
         self.assertAlmostEqual(self.joint_states.position[1], 2.0)
         self.assertAlmostEqual(self.joint_states.position[2], 3.0)
         
-# caclling the main fucntion       
+# calling the main function       
 if __name__ == '__main__':
     rostest.rosrun('fake_joint_driver',
                    'test_fake_joint_driver',
