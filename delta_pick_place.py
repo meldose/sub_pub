@@ -6,6 +6,7 @@ import time # imported time module
 
 # created clss JointMover
 class JointMover(Node):
+    
     def __init__(self):
         super().__init__('joint_mover')
         self.publisher = self.create_publisher(JointState, '/joint_command', 10)
