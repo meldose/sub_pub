@@ -4,7 +4,7 @@ from sensor_msgs.msg import JointState # imported Joinstate
 import time # imported time module
 
 
-# created clss JoinMover
+# created clss JointMover
 class JointMover(Node):
     def __init__(self):
         super().__init__('joint_mover')
