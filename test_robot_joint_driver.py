@@ -14,11 +14,15 @@ from sensor_msgs.msg import JointState # imported Jointstate
 from trajectory_msgs.msg import JointTrajectory # imported JoinTrajectory
 import unittest# imported unittest
 
+# created class TestRobotJointDriver
 class TestRobotJointDriver(unittest.TestCase):
     @classmethod
+
+    # created  fucntion for setting up the class
     def setUpClass(cls):
         rospy.init_node('test_robot_joint_driver_node')
-
+    
+    # created the functin for setUp
     def setUp(self):
         rospy.Subscriber('joint_states',
                          JointState, self.cb_joint_states, queue_size=10)
@@ -35,10 +39,13 @@ class TestRobotJointDriver(unittest.TestCase):
             FollowJointTrajectoryAction)
 
         self.client.wait_for_server(timeout=rospy.Duration(10.0))
-        
+
+    # created the fucntoin for joint states  
     def cb_joint_states(self, msg):
         self.joint_states = msg
 
+
+    # created the fucntion for test_joint_treajectory command
     def test_joint_trajectory_command(self):
         traj = JointTrajectory()
         traj.header.stamp = rospy.Time(0)
@@ -58,7 +65,8 @@ class TestRobotJointDriver(unittest.TestCase):
         self.assertAlmostEqual(self.joint_states.position[4], 1.57) 
         self.assertAlmostEqual(self.joint_states.position[5], 1.57) 
         self.assertAlmostEqual(self.joint_states.position[6], 1.57) 
-        
+
+# calling the main fucntion        
 if __name__ == '__main__':
     rostest.rosrun('robot_joint_driver',
                    'test_robot_joint_driver',
