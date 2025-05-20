@@ -1,17 +1,18 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import actionlib
+import actionlib # imported actionliib
 from control_msgs.msg import (
     FollowJointTrajectoryAction)
 from trajectory_msgs.msg import (
     JointTrajectory,
     JointTrajectoryPoint)
-import rospy
-import rostest
-from sensor_msgs.msg import JointState
-from trajectory_msgs.msg import JointTrajectory
-import unittest
+
+import rospy # imported rospy
+import rostest # imoprted rostest
+from sensor_msgs.msg import JointState # imported Jointstate
+from trajectory_msgs.msg import JointTrajectory # imported JoinTrajectory
+import unittest# imported unittest
 
 class TestRobotJointDriver(unittest.TestCase):
     @classmethod

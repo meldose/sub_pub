@@ -1,19 +1,20 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import actionlib
+import actionlib ä# imported actionlib
 from control_msgs.msg import (
     FollowJointTrajectoryAction,
     FollowJointTrajectoryGoal)
 from trajectory_msgs.msg import (
     JointTrajectory,
     JointTrajectoryPoint)
-import rospy
-import rostest
-from sensor_msgs.msg import JointState
-from trajectory_msgs.msg import JointTrajectory
-import unittest
+import rospy # imported rospy
+import rostest # imoprted rostest
+from sensor_msgs.msg import JointState # imported Jointstate
+from trajectory_msgs.msg import JointTrajectory # imported JoinTrajectory
+import unittest# imported unittest
 
+# class TestFakeJoinDriver
 class TestFakeJointDriver(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -35,10 +36,12 @@ class TestFakeJointDriver(unittest.TestCase):
             FollowJointTrajectoryAction)
 
         self.client.wait_for_server(timeout=rospy.Duration(10.0))
-        
+# created funciton for join states
+
     def cb_joint_states(self, msg):
         self.joint_states = msg
-        
+
+# created funciton for joint trajectory command        
     def test_joint_trajectory_command(self):
         traj = JointTrajectory()
         traj.header.stamp = rospy.Time(0)
@@ -55,6 +58,7 @@ class TestFakeJointDriver(unittest.TestCase):
         self.assertAlmostEqual(self.joint_states.position[1], 2.0)
         self.assertAlmostEqual(self.joint_states.position[2], 3.0)
 
+# created funciton for joint trajectory action
     def test_joint_trajectory_action(self):
         goal = FollowJointTrajectoryGoal()
         traj = goal.trajectory
@@ -73,7 +77,7 @@ class TestFakeJointDriver(unittest.TestCase):
         self.assertAlmostEqual(self.joint_states.position[1], 2.0)
         self.assertAlmostEqual(self.joint_states.position[2], 3.0)
         
-        
+# caclling the main fucntion       
 if __name__ == '__main__':
     rostest.rosrun('fake_joint_driver',
                    'test_fake_joint_driver',

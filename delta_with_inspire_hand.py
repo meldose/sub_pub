@@ -1,8 +1,9 @@
-import rclpy
-from rclpy.node import Node
-from sensor_msgs.msg import JointState
-import time
+import rclpy # imported rclpy modules
+from rclpy.node import Node # imported Node modules
+from sensor_msgs.msg import JointState # imported Joinstate
+import time # imported time module
 
+# created class JointMover
 class JointMover(Node):
     def __init__(self):
         super().__init__('joint_mover')
@@ -32,6 +33,7 @@ class JointMover(Node):
             
             time.sleep(0.01)  # Sleep for a short time to simulate periodic updates
 
+# created function for closing gripper
     def close_gripper(self):
         msg = JointState()
         msg.header.stamp = self.get_clock().now().to_msg()
@@ -43,6 +45,7 @@ class JointMover(Node):
         self.publisher.publish(msg)
         self.get_logger().info('Gripper closed.')
 
+# created fucntion for opening gripper
     def open_gripper(self):
         msg = JointState()
         msg.header.stamp = self.get_clock().now().to_msg()
@@ -53,7 +56,8 @@ class JointMover(Node):
         # Publish the message to close the gripper
         self.publisher.publish(msg)
         self.get_logger().info('Gripper Opened.')
-        
+
+# created function for home gripper       
     def home_gripper(self):
         msg = JointState()
         msg.header.stamp = self.get_clock().now().to_msg()
@@ -66,6 +70,7 @@ class JointMover(Node):
 
 
     
+# created the main function
 
 def main(args=None):
     rclpy.init(args=args)
@@ -154,6 +159,7 @@ def main(args=None):
     
     rclpy.shutdown()
 
+# calling the main function
 if __name__ == '__main__':
     main()
 

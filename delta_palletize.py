@@ -1,17 +1,19 @@
-import rclpy
-from rclpy.node import Node
-from sensor_msgs.msg import JointState
+import rclpy # imported rclpy modules
+from rclpy.node import Node # imported Node modules
+from sensor_msgs.msg import JointState # imported Joinstate
 from std_msgs.msg import Bool
 from std_msgs.msg import Float64
-import time
+import time # imported time module
 
+# created class JointMover
 class JointMover(Node):
     def __init__(self):
         super().__init__('joint_mover')
         self.joint_publisher = self.create_publisher(JointState, '/joint_command', 10)
         self.suction_publisher = self.create_publisher(Bool, '/suction_command', 10)
         self.conveyor_publisher = self.create_publisher(Float64, '/conveyor_topic', 10)
-        
+    
+    # created function for move Joints
     def move_joints(self, start_positions, end_positions, duration):
         start_time = time.time()
         
@@ -35,7 +37,8 @@ class JointMover(Node):
             self.joint_publisher.publish(msg)
             
             time.sleep(0.01)  # Sleep for a short time to simulate periodic updates
-
+  
+  # created function for suction command
     def suction_command(self, command):
         msg = Bool()
         msg.data = command
@@ -45,6 +48,7 @@ class JointMover(Node):
         else:
             self.get_logger().info('Gripper Close')
 
+  #created function for convbeyor command
     def conveyor_command(self, speed):
         flow = Float64()
         flow.data = speed
@@ -56,6 +60,7 @@ class JointMover(Node):
         elif flow.data == 0:
             self.get_logger().info('Conveyor Stopped')
 
+# created function for main
 def main(args=None):
     rclpy.init(args=args)
     joint_mover = JointMover()
@@ -183,6 +188,8 @@ def main(args=None):
 
     rclpy.shutdown()
 
+
+# calling the main function 
 if __name__ == '__main__':
     main()
 

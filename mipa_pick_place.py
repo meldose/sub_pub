@@ -6,19 +6,20 @@ import time
 
 # created class Mipa Rbobot
 class MiPA_Robot(Node):
+
     def __init__(self):
         super().__init__('joint_mover')
-        self.publisher_motion = self.create_publisher(Twist, '/cmd_vel', 10)
-        self.publisher_joint = self.create_publisher(JointState, '/mipa_joint_command', 10)
+        self.publisher_motion = self.create_publisher(Twist, '/cmd_vel', 10) # defining the publisher
+        self.publisher_joint = self.create_publisher(JointState, '/mipa_joint_command', 10) # defning the pulishre
         self.subscription = self.create_subscription(
             JointState,
             '/mipa_joint_states',
             self.joint_state_callback,
             10
-        )
+        ) # created the subscription
         self.subscription  # prevent unused variable warning
 
-        self.latest_joint_state = None
+        self.latest_joint_state = None # setting the latest joint state
 
         self.joint_names = [
             'left_shoulder_x','left_shoulder_y', 'left_shoulder_z', 'left_elbow_y',
@@ -315,9 +316,6 @@ def main(args=None):
 
     mipa_robot.move_robot(linear_speed=0.5, angular_speed=0.0, duration=8.0)
 
-
-
-    
 
     rclpy.shutdown()
 
