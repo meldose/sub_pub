@@ -1,9 +1,10 @@
-import rclpy
-from rclpy.node import Node
-from sensor_msgs.msg import JointState
-from geometry_msgs.msg import Twist
+import rclpy # imported rclpy modules
+from rclpy.node import Node # imported Node modules
+from sensor_msgs.msg import JointState # imported Joinstate
+from geometry_msgs.msg import Twist # imported Twist 
 import time
 
+# created class Mipa Rbobot
 class MiPA_Robot(Node):
     def __init__(self):
         super().__init__('joint_mover')
@@ -26,8 +27,11 @@ class MiPA_Robot(Node):
             'right_wrist_x','right_wrist_y','right_wrist_z','Torso_lin_z'
         ]
 
+# function for joint state callback
     def joint_state_callback(self, msg):
         self.latest_joint_state = msg
+
+# functionf for wait for joint state
 
     def wait_for_joint_state(self, timeout=5.0):
         start_time = time.time()
@@ -56,6 +60,8 @@ class MiPA_Robot(Node):
                 selected_state.effort.append(full_joint_state.effort[i] if i < len(full_joint_state.effort) else 0.0)
 
         return selected_state
+    
+    # function for move joints 
 
     def move_joints(self, start_positions, end_positions, duration):
         start_time = time.time()
@@ -81,6 +87,7 @@ class MiPA_Robot(Node):
 
             time.sleep(0.01)  # Sleep for a short time to simulate periodic updates
 
+### function for move robot 
     def move_robot(self, duration, linear_speed, angular_speed):
         twist = Twist()
         rate = 0.1  # 10 Hz
@@ -185,7 +192,7 @@ class MiPA_Robot(Node):
         self.get_logger().info('Right Gripper Home....')
 
 
-
+# function for main function 
 
 def main(args=None):
     rclpy.init(args=args)
@@ -313,6 +320,8 @@ def main(args=None):
     
 
     rclpy.shutdown()
+
+# calling up main function
 
 if __name__ == '__main__':
     main()
